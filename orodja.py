@@ -1,3 +1,4 @@
+import csv
 import os
 import requests
 
@@ -19,3 +20,23 @@ def shrani_niz_v_datoteko(besedilo, mapa, datoteka):
     pot = os.path.join(mapa, datoteka)
     with open(pot, "w", encoding="utf-8") as izhod:
         izhod.write(besedilo)
+
+
+def preberi_datoteko_v_niz(mapa, datoteka):
+    pot = os.path.join(mapa, datoteka)
+    with open(pot, "r", encoding="utf-8") as vhod:
+        return vhod.read()
+
+
+def datoteka_obstaja(mapa, datoteka):
+    return os.path.exists(os.path.join(mapa, datoteka))
+
+
+def zapisi_csv(stolpci, vrstice, mapa, datoteka):
+    os.makedirs(mapa, exist_ok=True)
+    pot = os.path.join(mapa, datoteka)
+    with open(pot, "w", encoding="utf-8", newline="") as csv_datoteka:
+        pisatelj = csv.DictWriter(csv_datoteka, fieldnames=stolpci)
+        pisatelj.writeheader()
+        for vrstica in vrstice:
+            pisatelj.writerow(vrstica)
