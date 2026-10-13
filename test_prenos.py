@@ -1,6 +1,6 @@
 import orodja
 
-URL = "https://baseballsavant.mlb.com/leaderboard/pitch-arsenals?year=2025&min=100&type=avg_speed&hand="
+URL = "https://baseballsavant.mlb.com/leaderboard/pitch-arsenal-stats?type=pitcher&pitchType=FF&year=2025&team=&min=100"
 vsebina = orodja.prenesi_stran(URL)
 
 if vsebina is not None:
