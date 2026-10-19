@@ -1,6 +1,6 @@
 import json
 import re
-import orodja
+import orodja #lahko uporabljamo kodo sestavljeno v orodja.py
 
 SEZONA = 2025
 URL = f"https://baseballsavant.mlb.com/leaderboard/pitch-arsenals?year={SEZONA}&min=100&type=avg_speed&hand="
@@ -40,18 +40,21 @@ def prenos_strani():
 
     orodja.shrani_niz_v_datoteko(vsebina, MAPA, DATOTEKA)
     print("shranjeno:", DATOTEKA)
-
+#shranimo podatke v datoteko, if stavki so za ze prenesene strani, napake
 
 def izlusci_metalce(vsebina):
     ujemanje = re.search(r"var data = (\[.*?\]);\s*\n", vsebina, flags=re.DOTALL)
     return json.loads(ujemanje.group(1))
-
+#z regexom poiscemo ustrezne dele besedila
+#[\ --> poosci tocno ta znak, .*? ustavi e pri prvem ], ne zadnjem
+#\s prazen znak, \n prelomn vrstice
+#JSON --> pretvarjanje pythoniv zapisov v json in obratno
 
 def v_stevilo(vrednost):
     if vrednost is None or vrednost == "":
         return None
     return float(vrednost)
-
+#niz pretvori v stevilo, mankajoce pa v None
 
 def vrstice_metalca(metalec):
     vrstice = []
@@ -74,7 +77,8 @@ def vrstice_metalca(metalec):
             }
         )
     return vrstice
-
+#preberes lasatsnosti meta in jih shranis v slovenska imena
+#
 
 def main():
     prenos_strani()
@@ -85,10 +89,12 @@ def main():
     vrstice = []
     for metalec in metalci:
         vrstice.extend(vrstice_metalca(metalec))
+#extend ne append da ne naredi seznam seznamov ampak dolg seznam vrstic
 
     orodja.zapisi_csv(STOLPCI, vrstice, MAPA, CSV_DATOTEKA)
     print("metalcev:", len(metalci), "| vrstic v CSV:", len(vrstice))
-
-
+#glavna funkcija, po vrsti poklice vse ki sma jih prej sestavlia
+#prenos strani -> preberes->izluscis metalce->zanka, gres cez vrstice-> zapises v csv
 if __name__ == "__main__":
     main()
+    #zazenes samo, ce datoteko pozenes neposredno

@@ -1,6 +1,6 @@
 # Vpliv hitrosti in vrste meta na odbijanje v MLB
 
-Projektna naloga pri predmetu ... (dopiši ime predmeta)
+Projektna naloga pri predmetu Uvod v programiranje.
 
 ## Opis
 

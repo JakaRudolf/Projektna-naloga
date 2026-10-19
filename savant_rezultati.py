@@ -29,7 +29,7 @@ STOLPCI = {
 
 def ime_datoteke(vrsta):
     return f"stran_savant_rezultati_{vrsta}_{SEZONA}.html"
-
+#sestavi ime datoteke, vrsta meta in sezona (letnica)
 
 def prenos_strani():
     for vrsta in VRSTE_METOV:
@@ -54,6 +54,8 @@ def prenos_strani():
         print("shranjeno:", datoteka)
 
         time.sleep(random.uniform(2, 3))
+#da strezniku ne damo prevec zahtev na enkrat(pocaka nakljucno med 2/3 sec-- > claude
+#isto kot v hitrosti pac preverja ustreznost podatkov in jih zapise v datoteko
 
 
 def izlusci_vrstice(vsebina):
