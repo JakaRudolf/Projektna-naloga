@@ -78,7 +78,9 @@ def vrstice_metalca(metalec):
         )
     return vrstice
 #preberes lasatsnosti meta in jih shranis v slovenska imena
-#
+#odstrani nepomembne podatke, spremeni iz "siroke" v "dolgo" obliko
+#|-->spremeni v 1 vrstica za metalec x vrsta meta --> kot kasneje v tabeli rezultatov
+#ce kljuca ni get vrne None, slovar[] vrne napako
 
 def main():
     prenos_strani()

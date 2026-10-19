@@ -13,6 +13,7 @@ def prenesi_stran(url):
         print("spletna stran ni dosegljiva:", napaka)
         return None
     return odgovor.text
+#vrne html kodo kot besedilo
 
 
 def shrani_niz_v_datoteko(besedilo, mapa, datoteka):
@@ -21,6 +22,7 @@ def shrani_niz_v_datoteko(besedilo, mapa, datoteka):
     with open(pot, "w", encoding="utf-8") as izhod:
         izhod.write(besedilo) 
 #shrani vsebino strani v datoteko, hkrati jo s pomocjo os pravilno razvrsti
+#ce mapa ne obstaja jo ustvari
 
 def preberi_datoteko_v_niz(mapa, datoteka):
     pot = os.path.join(mapa, datoteka)
@@ -43,4 +45,5 @@ def zapisi_csv(stolpci, vrstice, mapa, datoteka):
             pisatelj.writerow(vrstica)
 #newline (windows only) prepreci nastanek praznih vrstic
 #writerow --> en slovar ena vrstica
-#vrstice je seznam slovarjev
+#vrstice je seznam slovarjev (en slovar = ena vrstica)
+#dobi imena stolpcev in seznam slovarjev -> vse zapise v csv datoteko

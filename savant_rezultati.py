@@ -61,12 +61,16 @@ def prenos_strani():
 def izlusci_vrstice(vsebina):
     ujemanje = re.search(r"var leaderboardData = (\[.*?\]);", vsebina, flags=re.DOTALL)
     return json.loads(ujemanje.group(1))
-
+#vsebina je cela html koda ene shranjenje strani
+#dotall ujema nekatere prelome vrstic
+#za razliko od prejsnjega regexa ni \s*n, ker se ]: pojavi (le)na koncu
+#z jsonom pretvorimo v python objekte
 
 def v_stevilo(vrednost):
     if vrednost is None or vrednost == "":
         return None
     return float(vrednost)
+#pretvorimo v stevila, preprecimo da se pojavi napaka
 
 
 def pocisti_vrstico(zapis):
@@ -79,7 +83,10 @@ def pocisti_vrstico(zapis):
         else:
             vrstica[stolpec] = v_stevilo(zapis[polje])
     return vrstica
-
+#"polepsamo" dobljeno vrstico, zbrisemo neuporabne podatke, jih prevedemo
+#jih spremenimo v stevilke
+#dobimo lep slovar za posameznega igralca z vsemi uporabnimi podatki
+# 51 v 13 stolpcev za predstavo
 
 def main():
     prenos_strani()
@@ -95,8 +102,8 @@ def main():
             vrstice.append(pocisti_vrstico(zapis))
 
     orodja.zapisi_csv(list(STOLPCI.keys()), vrstice, MAPA, CSV_DATOTEKA)
-    print("vrstic v CSV:", len(vrstice))
-
+    print("vrstic v CSV:", len(vrstice)) 
+#zdruzi vse do zdaj napisano, v csv prepise, lepe izlusccene podatke (seznam)
 
 if __name__ == "__main__":
     main()
