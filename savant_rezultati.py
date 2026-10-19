@@ -10,7 +10,6 @@ URL = "https://baseballsavant.mlb.com/leaderboard/pitch-arsenal-stats?type=pitch
 MAPA = "podatki/savant_rezultati"
 CSV_DATOTEKA = f"savant_rezultati_{SEZONA}.csv"
 
-# Stolpci v CSV: ime stolpca -> ime polja v podatkih Savanta
 STOLPCI = {
     "id_metalca": "player_id",
     "vrsta_meta": "pitch_type",
@@ -32,12 +31,10 @@ def ime_datoteke(vrsta):
     return f"stran_savant_rezultati_{vrsta}_{SEZONA}.html"
 
 
-# Za vsako vrsto meta prenese stran z rezultati in jo shrani
 def prenos_strani():
     for vrsta in VRSTE_METOV:
         datoteka = ime_datoteke(vrsta)
 
-        # že prenesene strani preskočimo
         if orodja.datoteka_obstaja(MAPA, datoteka):
             continue
 
@@ -46,7 +43,6 @@ def prenos_strani():
             print("prenos ni uspel:", vrsta)
             continue
 
-        # stran mora vsebovati podatke in pravo vrsto meta
         if "var leaderboardData = [{" not in vsebina:
             print("stran nima podatkov:", vrsta)
             continue
@@ -57,24 +53,20 @@ def prenos_strani():
         orodja.shrani_niz_v_datoteko(vsebina, MAPA, datoteka)
         print("shranjeno:", datoteka)
 
-        # premor, da strežnika ne obremenjujemo
         time.sleep(random.uniform(2, 3))
 
 
-# Iz HTML-ja vzame seznam metalcev, ki je zapisan kot JSON v spremenljivki leaderboardData
 def izlusci_vrstice(vsebina):
     ujemanje = re.search(r"var leaderboardData = (\[.*?\]);", vsebina, flags=re.DOTALL)
     return json.loads(ujemanje.group(1))
 
 
-# Pretvori niz v število; prazne vrednosti (None ali "") postanejo None
 def v_stevilo(vrednost):
     if vrednost is None or vrednost == "":
         return None
     return float(vrednost)
 
 
-# Iz zapisa Savanta naredi vrstico z imeni stolpcev, ki jih uporabljamo
 def pocisti_vrstico(zapis):
     vrstica = {}
     for stolpec, polje in STOLPCI.items():
@@ -87,7 +79,6 @@ def pocisti_vrstico(zapis):
     return vrstica
 
 
-# Izvede celoten postopek: prenese strani, izlušči podatke in jih zapiše v CSV
 def main():
     prenos_strani()
 
