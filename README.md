@@ -8,15 +8,15 @@ V nalogi preučujem, kako hitrost in vrsta meta v ligi MLB vplivata na to, kako
 odbijalec žogo odbije (zgrešen zamah, hitrost odboja, povprečje udarcev).
 
 Podatki so s strani [Baseball Savant](https://baseballsavant.mlb.com/) (Statcast)
-za sezono 2025, samo redni del sezone (brez končnice).
+za sezono 2025, samo redni del sezone.
 
 ## Vir podatkov
 
 Uporabljam dve lestvici:
 
-- **Pitch Arsenals** (hitrosti): za vsakega metalca povprečna hitrost, vrtenje in
+- Pitch Arsenals (hitrosti): za vsakega metalca povprečna hitrost, vrtenje in
   gibanje vsake vrste meta.
-- **Pitch Arsenal Stats** (rezultati): za vsakega metalca in vrsto meta, kaj so
+- Pitch Arsenal Stats (rezultati): za vsakega metalca in vrsto meta, kaj so
   odbijalci dosegli proti njej. Ena stran za vsako vrsto meta (9 strani).
 
 Upoštevani so samo meti, ki jih je metalec vrgel vsaj 100-krat.
@@ -37,12 +37,12 @@ Upoštevani so samo meti, ki jih je metalec vrgel vsaj 100-krat.
 
        pip install requests pandas matplotlib
 
-2. Zaženi obe skripti (če HTML strani že obstajajo, se ne prenašajo ponovno):
+2. Zaženi obe skripti:
 
        python savant_hitrosti.py
        python savant_rezultati.py
 
-3. Odpri `analiza.ipynb` (npr. v VS Code) in zaženi vse celice.
+3. Odpri `analiza.ipynb` in zaženi vse celice.
 
 ## Glavne ugotovitve
 
